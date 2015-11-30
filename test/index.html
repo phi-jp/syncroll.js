@@ -1,0 +1,93 @@
+<!doctype html>
+ 
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js'></script>
+    <script src='../syncroll.js'></script>
+  </head>
+  <body>
+    <div class='main'>
+      <div class='area'></div>
+      <div class='area'></div>
+      <div class='area'></div>
+      <div class='area'></div>
+      <div class='area'></div>
+      <div class='area'></div>
+    </div>
+  </body>
+</html>
+
+
+<style>
+*, *:before, *:after {
+  box-sizing: border-box; 
+}
+html {
+  font-size: 16px;
+}
+body {
+  color: #444;
+  background-color: hsl(0, 0%, 96%);
+}
+h1 {
+  font-size: 1.8rem;
+}
+p {
+  margin: 1rem;
+}
+
+.main {
+  display: flex;
+  flex: 3;
+  justify-content: center;
+  align-items: center;
+}
+
+.area {
+  text-align: center;
+  background-color: hsl(200, 80%, 70%);
+  color: white;
+  margin: 10px;
+  width: 300px;
+  height: 80vh;
+  border-radius: 8px;
+  overflow: scroll;
+}
+
+</style>
+
+<script>
+
+/*
+ * runstant
+ */
+
+window.onload = function() {
+  var query = '.area';
+  // add dummy text
+  var elements = document.querySelectorAll(query);
+  elements = Array.prototype.slice.call(elements);
+
+  elements.forEach(function(elm, index) {
+    for (var i=0; i<(50*(index+1)); ++i) {
+      var p = document.createElement('p');
+      p.innerHTML = i+1;
+      elm.appendChild(p);
+    }
+    var angle = (360/elements.length)*index;
+    elm.style.backgroundColor = 'hsl(' + angle + ',80%, 60%)';
+  });
+
+  // sync
+  syncroll(query);
+};
+
+
+</script>
